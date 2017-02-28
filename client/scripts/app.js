@@ -122,7 +122,7 @@ var app = {
   },
   autoRefresh: function() {
     app.fetch();
-    // setTimeout(this.autoRefresh.bind(this), 5000);
+    setTimeout(this.autoRefresh.bind(this), 10000);
   }
 };
 

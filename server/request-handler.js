@@ -49,30 +49,26 @@ var requestHandler = function(request, response) {
   console.log('Serving request type ' + request.method + ' for url ' + request.url);
 
   var statusCode = 200;
+  var body = [];
   // The outgoing status.
-  if (request.method === 'GET') {
+  if (request.url !== '/classes/messages') {
+    statusCode = 404;
+  } else if (request.method === 'GET') {
     statusCode = 200;
   } else if (request.method === 'POST') {
     statusCode = 201;
+    request.on('data', function(chunk) {
+      body.push(chunk);
+      console.log(chunk);
+    });
+    request.on('end', function() {
+      body = body.toString();
+      console.log(body);
+      if (body !== '') {
+        messages.push(JSON.parse(body));
+      }
+    });
   }
-
-  if (request.url !== '/classes/messages') {
-    statusCode = 404;
-  }
-
-  var body = [];
-
-  request.on('data', function(chunk) {
-    // messages.push(chunk);
-    body.push(chunk);
-  });
-  request.on('end', function() {
-    body = Buffer.concat(body).toString();
-    if (body !== '') {
-      messages.push(JSON.parse(body));
-    }
-  });
-
 
   // See the note below about CORS headers.
   var headers = defaultCorsHeaders;
