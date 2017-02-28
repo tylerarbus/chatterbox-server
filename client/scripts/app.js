@@ -5,7 +5,7 @@ var app = {
     app.handleSubmit();
   },
 
-  server: 'http://parse.sfm8.hackreactor.com/chatterbox/classes/messages',
+  server: 'http://127.0.0.1:3000/classes/messages',
 
   send: function(message) {
     $.ajax({
@@ -29,11 +29,12 @@ var app = {
       url: app.server,
       type: 'GET',
       contentType: 'application/json',
-      data: {
-        limit: 30,
-        order: '-createdAt',
-      },
+      // data: {
+      //   limit: 30,
+      //   order: '-createdAt',
+      // },
       success: function (data) {
+        console.log(data);
         app.messages = data.results;
         app.renderMessage();        
         console.log('chatterbox: Fetched new messages');
@@ -122,7 +123,7 @@ var app = {
   },
   autoRefresh: function() {
     app.fetch();
-    setTimeout(this.autoRefresh.bind(this), 5000);
+    // setTimeout(this.autoRefresh.bind(this), 5000);
   }
 };
 
