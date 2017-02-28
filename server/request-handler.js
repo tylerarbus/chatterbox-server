@@ -40,6 +40,7 @@ var requestHandler = function(request, response) {
   // http://nodejs.org/documentation/api/
 
   // Do some basic logging.
+  console.log(request);
   //
   // Adding more logging to your server can be an easy way to get passive
   // debugging help, but you should always be careful about leaving stray
@@ -52,11 +53,12 @@ var requestHandler = function(request, response) {
     statusCode = 200;
   } else if (request.method === 'POST') {
     statusCode = 201;
-    console.log(request);
     messages.push(request._postData);
-  } 
+  }
 
-  
+  if (request.url !== '/classes/messages') {
+    statusCode = 404;
+  }
 
   // See the note below about CORS headers.
   var headers = defaultCorsHeaders;

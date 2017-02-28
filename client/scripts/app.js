@@ -34,7 +34,6 @@ var app = {
       //   order: '-createdAt',
       // },
       success: function (data) {
-        console.log(data);
         app.messages = data.results;
         app.renderMessage();        
         console.log('chatterbox: Fetched new messages');
