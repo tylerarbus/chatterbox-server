@@ -52,7 +52,7 @@ var requestHandler = function(request, response) {
   //
   // Calling .end "flushes" the response's internal buffer, forcing
   // node to actually send all the data over to the client.
-  response.end('Hello, World!');
+  response.end('Hello, Chris!');
 };
 
 // These headers will allow Cross-Origin Resource Sharing (CORS).
@@ -70,4 +70,7 @@ var defaultCorsHeaders = {
   'access-control-allow-headers': 'content-type, accept',
   'access-control-max-age': 10 // Seconds.
 };
+
+module.exports.requestHandler = requestHandler;
+module.exports.defaultCorsHeaders = defaultCorsHeaders;
 
