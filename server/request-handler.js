@@ -71,7 +71,6 @@ var requestHandler = function(request, response) {
     if (body !== '') {
       messages.push(JSON.parse(body));
     }
-    console.log(messages);
   });
 
 
